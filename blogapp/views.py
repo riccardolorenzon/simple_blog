@@ -3,7 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from models import BlogArticle
 from django.contrib.auth import authenticate, login
 
-# Create your views here.
+# Create your views here
 def index(request):
     if request.method == 'POST':
         username = request.POST['username']
