@@ -3,7 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from models import BlogArticle
 from django.contrib.auth import authenticate, login
 
-# Create your views here
+# index
 def index(request):
     if request.method == 'POST':
         username = request.POST['username']
@@ -16,6 +16,7 @@ def index(request):
     response = render(request, "./blogtemplate.html", {"testvar" : "test string", "blogs" : BlogArticle.objects.all()} )
     return response
 
+# create blog view
 def createblog(request):
     newBlog = BlogArticle()
     newBlog.title = request.POST['title']
