@@ -7,6 +7,14 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 # index
 def index(request):
     blog_objects = BlogArticle.objects.all()
+    paginator = Paginator(blog_objects, 5)
+    page = request.GET.get('page')
+    try:
+        blog_objects = paginator.page(page)
+    except PageNotAnInteger:
+        blog_objects = paginator.page(1)
+    except EmptyPage:
+        blog_objects = paginator.page(paginator.num_pages)
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']

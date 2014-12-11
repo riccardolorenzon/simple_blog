@@ -47,7 +47,23 @@
             </div>
             {{ blog.blog_content }}
         {% endfor %}
+
     </div>
+    <div class="blog well">
+            <span class="step-links">
+                {% if blogs.has_previous %}
+                    <a href="?page={{ blogs.previous_page_number }}">previous</a>
+                {% endif %}
+
+                <span class="current">
+                    Page {{ blogs.number }} of {{ blogs.paginator.num_pages }}.
+                </span>
+
+                {% if blogs.has_next %}
+                    <a href="?page={{ blogs.next_page_number }}">next</a>
+                {% endif %}
+            </span>
+        </div>
     <div class="modal fade" id="login">
         <div class="modal-dialog">
             <div class="modal-content">
