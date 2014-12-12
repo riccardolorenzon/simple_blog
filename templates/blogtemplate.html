@@ -28,28 +28,33 @@
         }
 
     </style>
+
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
         <ul class="nav navbar-nav">
-            {% if user != None %}
+            {% if user != None and user.username != '' %}
                 <a class="navbar-brand" href="#">{{ user.username }}</a>
-                <li><a href="#" data-toggle="modal" data-target="#addblog">Add blog!</a> </li>
-                <li><a href="./logout/">Logout!</a></li>
+                <li><a href="#" data-toggle="modal" data-target="#addblog">add blog</a> </li>
+                <li><a href="./logout/">logout</a></li>
             {% else %}
-                <li><a href="#" data-toggle="modal" data-target="#login">Login!</a></li>
+                <li><a href="#" data-toggle="modal" data-target="#login">login</a></li>
             {% endif %}
         </ul>
     </nav>
+    
     <div class="page-header centerdiv">
         <h1>Blog articles!</h1>
     </div>
-    <div class="blog well">
+    <div class="container well blog">
         {% for blog in blogs %}
-            <div class="page-header">
-                <h3>{{ blog.title }}</h3>
+            <div class="row">
+                <div class="span12">
+                    <div class="page-header">
+                        <h3>{{ blog.title }}</h3>
+                    </div>
+                    {{ blog.blog_content }}
+                </div>
             </div>
-            {{ blog.blog_content }}
         {% endfor %}
-
     </div>
     <div class="blog well">
             <span class="step-links">

@@ -19,6 +19,7 @@ def index(request):
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(username= username, password = password)
+
         if user != None:
             login(request,user)
             response = render(request, "./blogtemplate.html", {"testvar" : "test string", "blogs" : blog_objects, "user" : user} )
