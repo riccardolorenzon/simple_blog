@@ -31,10 +31,12 @@
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
         <ul class="nav navbar-nav">
             {% if user != None %}
-            <a class="navbar-brand" href="#">{{ user.username }}</a>
-            <li><a href="#" data-toggle="modal" data-target="#addblog">Add blog!</a> </li>
+                <a class="navbar-brand" href="#">{{ user.username }}</a>
+                <li><a href="#" data-toggle="modal" data-target="#addblog">Add blog!</a> </li>
+                <li><a href="./logout/">Logout!</a></li>
+            {% else %}
+                <li><a href="#" data-toggle="modal" data-target="#login">Login!</a></li>
             {% endif %}
-            <li><a href="#" data-toggle="modal" data-target="#login">Login!</a></li>
         </ul>
     </nav>
     <div class="page-header centerdiv">

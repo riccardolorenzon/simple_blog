@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from models import BlogArticle
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # index
@@ -33,4 +33,8 @@ def createblog(request):
     newBlog.author = request.user
     newBlog.blog_content = request.POST['blog_content']
     newBlog.save()
+    return HttpResponseRedirect('/')
+
+def logout_view(request):
+    logout(request)
     return HttpResponseRedirect('/')
