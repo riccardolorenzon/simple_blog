@@ -60,11 +60,9 @@
                 {% if blogs.has_previous %}
                     <a href="?page={{ blogs.previous_page_number }}">previous</a>
                 {% endif %}
-
                 <span class="current">
                     Page {{ blogs.number }} of {{ blogs.paginator.num_pages }}.
                 </span>
-
                 {% if blogs.has_next %}
                     <a href="?page={{ blogs.next_page_number }}">next</a>
                 {% endif %}
