@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
 from blogapp import views
-from blogapp.views import UserViewSet, GroupViewSet
+from blogapp.views import UserViewSet, GroupViewSet, BlogArticleViewSet
 from django.contrib import admin
 from rest_framework import routers, serializers, viewsets
 
@@ -8,6 +8,7 @@ from rest_framework import routers, serializers, viewsets
 router = routers.DefaultRouter()
 router.register(r'users', UserViewSet)
 router.register(r'groups', GroupViewSet)
+router.register(r'blogarticles', BlogArticleViewSet)
 admin.autodiscover()
 
 urlpatterns = patterns('',

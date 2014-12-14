@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User, Group
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from rest_framework import viewsets
-from serializers import UserSerializer, GroupSerializer
+from serializers import UserSerializer, GroupSerializer, BlogArticleSerializer
 
 # index
 def index(request):
@@ -56,3 +56,7 @@ class GroupViewSet(viewsets.ModelViewSet):
     """
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
+
+class BlogArticleViewSet(viewsets.ModelViewSet):
+    queryset = BlogArticle.objects.all()
+    serializer_class = BlogArticleSerializer
