@@ -14,7 +14,7 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('url', 'name')
 
 class BlogArticleSerializer(serializers.HyperlinkedModelSerializer):
-    author = serializers.HyperlinkedIdentityField(view_name='user-detail', format='json')
+    author = serializers.HyperlinkedRelatedField(read_only = True, view_name='user-detail', format='xml')
     class Meta:
         model = BlogArticle
         fields = ('title', 'blog_content', 'author')

@@ -7,9 +7,6 @@
 <body>
     <style type="text/css">
         .centerdiv {
-            width:45%;
-            margin-left: auto;
-            margin-right: auto;
             margin-top: 50px;
             text-align: center;
         }
@@ -21,11 +18,7 @@
         }
         .blog{
             margin-top: 0px;
-            width: 45%;
-            margin-left: auto;
-            margin-right: auto;
         }
-
     </style>
 
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -41,33 +34,46 @@
     </nav>
 
     <div class="page-header centerdiv">
-        <h1>Blog articles!</h1>
+        <h1>Blog articles list</h1>
     </div>
-    <div class="container well blog">
+
+    <div class="container">
         {% for blog in blogs %}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Panel heading without title
+                </div>
+                <div class="panel-body">
+                    Panel content
+                </div>
+            </div>
             <div class="row">
-                <div class="span12">
-                    <div class="page-header">
-                        <h3>{{ blog.title }}</h3>
-                    </div>
-                    {{ blog.blog_content }}
+                <div class="span4">
+                    <article>
+                        <section>
+                            <h2>{{ blog.title }}</h2>
+                            <p>
+                                {{ blog.blog_content }}
+                            </p>
+                        </section>
+                    </article>
                 </div>
             </div>
         {% endfor %}
     </div>
     <div class="blog well centerdiv">
-            <span class="step-links">
-                {% if blogs.has_previous %}
-                    <a href="?page={{ blogs.previous_page_number }}">previous</a>
-                {% endif %}
-                <span class="current">
-                    Page {{ blogs.number }} of {{ blogs.paginator.num_pages }}.
-                </span>
-                {% if blogs.has_next %}
-                    <a href="?page={{ blogs.next_page_number }}">next</a>
-                {% endif %}
+        <span class="step-links">
+            {% if blogs.has_previous %}
+                <a href="?page={{ blogs.previous_page_number }}">previous</a>
+            {% endif %}
+            <span class="current">
+                Page {{ blogs.number }} of {{ blogs.paginator.num_pages }}.
             </span>
-        </div>
+            {% if blogs.has_next %}
+                <a href="?page={{ blogs.next_page_number }}">next</a>
+            {% endif %}
+        </span>
+    </div>
     <div class="modal fade" id="login">
         <div class="modal-dialog">
             <div class="modal-content">
