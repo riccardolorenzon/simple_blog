@@ -43,7 +43,11 @@ def edit_article(request, article_id):
     return render(request, "./blogedit.html", {"blog" : blog})
 
 def update_article(request, article_id):
-    blog = BlogArticle.objects.filter(id = article_id)
+    blog = BlogArticle.objects.get(id = article_id)
+    if blog != None and request.method == 'POST':
+        blog.title = request.POST['title']
+        blog.blog_content = request.POST['content']
+        blog.save()
     return HttpResponseRedirect("/")
 
 def delete_article(request, article_id):

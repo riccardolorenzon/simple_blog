@@ -49,14 +49,15 @@
         <h1>Edit blog article {{ blog.title }}</h1>
     </div>
     <div class="container">
-            <form action="/update-blog/{{ blog.id }}" role="form">
+            <form method="POST" action="/update-article/{{ blog.id }}/" role="form">
+                {% csrf_token %}
                 <div class="form-group">
                     <label for="title">Title</label>
-                    <input type="text" class="form-control" id="title" placeholder="title" value="{{ blog.title }}">
+                    <input type="text" class="form-control" name="title" placeholder="title" value="{{ blog.title }}">
                 </div>
                  <div class="form-group">
                     <label for="title">Content</label>
-                    <textarea class="form-control" id="content" placeholder="content">{{ blog.blog_content }}</textarea>
+                    <textarea class="form-control" name="content" placeholder="content">{{ blog.blog_content }}</textarea>
                 </div>
                 <input type="submit" value="save">
                 <input type="button" value="reset">
