@@ -31,6 +31,16 @@
     <div class="page-header centerdiv">
         <br>
         <h1>Edit blog article #title</h1>
+        <form action="/update-blog/{{ blog.id }}" role="form">
+            <div class="form-group">
+                <label for="title">Title</label>
+                <input type="text" class="form-control" id="title" placeholder="title" value="{{ blog.title }}">
+            </div>
+             <div class="form-group">
+                <label for="title">Content</label>
+                <input type="text" class="form-control" id="content" placeholder="content" value="{{ blog.content }}">
+            </div>
+        </form>
     </div>
 </body>
 </html>

@@ -19,6 +19,8 @@ urlpatterns = patterns('',
     url(r'^api/', include(router.urls)),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^addblog/', views.createblog),
+    url(r'^edit-article/(?P<article_id>\w+)/$', views.edit_article),
+    url(r'^delete-article/(?P<article_id>\w+)/$', views.createblog),
     url(r'^logout/', views.logout_view),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 )

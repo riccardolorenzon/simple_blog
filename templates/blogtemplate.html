@@ -93,10 +93,10 @@
                         </div>
                         <div class="btn-toolbar" role="toolbar">
                             <div class="btn-group">
-                                <button type="button" class="btn btn-default" aria-label="left Align">
+                                <button type="button" class="btn btn-default" aria-label="left Align" onClick="location.href='/edit-article/{{ blog.id }}/'">
                                   <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                                 </button>
-                                <button type="button" class="btn btn-default" aria-label="middle Align">
+                                <button type="button" class="btn btn-default" aria-label="middle Align" onClick="location.href='/delete-article/{{ blog.id }}/'">
                                   <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
                                 </button>
                                  <button type="button" class="btn btn-default" aria-label="right Align">
@@ -119,7 +119,7 @@
                                 <a href="?page={{ blogs.previous_page_number }}">previous</a>
                             {% endif %}
                             <span class="current">
-                                Page {{ blogs.number }} of {{ blogs.paginator.num_pages }}.
+                                Page {{ blogs.number }} of {{ blogs.paginator.num_pages }}
                             </span>
                             {% if blogs.has_next %}
                                 <a href="?page={{ blogs.next_page_number }}">next</a>

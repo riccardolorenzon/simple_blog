@@ -39,6 +39,12 @@ def createblog(request):
     newBlog.save()
     return HttpResponseRedirect('/')
 
+def edit_article(request, article_id):
+    return HttpResponse("edit")
+
+def delete_article(request, article_id):
+    return HttpResponse("delete")
+
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect('/')
