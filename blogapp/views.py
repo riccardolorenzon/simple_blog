@@ -22,7 +22,6 @@ def index(request):
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(username= username, password = password)
-
         if user != None:
             login(request,user)
             response = render(request, "./blogtemplate.html", {"testvar" : "test string", "blogs" : blog_objects, "user" : user} )
@@ -40,10 +39,21 @@ def createblog(request):
     return HttpResponseRedirect('/')
 
 def edit_article(request, article_id):
-    return HttpResponse("edit")
+    blog = BlogArticle.objects.get(id = article_id)
+    return render(request, "./blogedit.html", {"blog" : blog})
+
+def update_article(request, article_id):
+    blog = BlogArticle.objects.filter(id = article_id)
+    return HttpResponseRedirect("/")
 
 def delete_article(request, article_id):
-    return HttpResponse("delete")
+    blog = BlogArticle.objects.filter(id = article_id)
+    deleted = True
+    if blog == None:
+        deleted = False
+    else:
+        blog.delete()
+    return HttpResponseRedirect("/")
 
 def logout_view(request):
     logout(request)
