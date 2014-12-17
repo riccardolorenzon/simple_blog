@@ -1,6 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
-from models import BlogArticle
+from models import BlogArticle, ImageBlogArticle
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User, Group
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -59,21 +59,29 @@ def delete_article(request, article_id):
         blog.delete()
     return HttpResponseRedirect("/")
 
+def upload_image(request):
+    new_sharedimage = ImageBlogArticle()
+    new_sharedimage.image = request.FILES['file']
+    new_sharedimage.blogarticle_id = request.POST['blogArticleId']
+    new_sharedimage.title = request.POST['title']
+    new_sharedimage.description = request.POST['description']
+    new_sharedimage.save()
+    return HttpResponseRedirect("/")
+
+def delete_image(request, article_id, image_id):
+    image = ImageBlogArticle.objects.get(id = image_id)
+    image.delete()
+    return HttpResponseRedirect("/")
+
 def logout_view(request):
     logout(request)
     return HttpResponseRedirect('/')
 
 class UserViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows users to be viewed or edited.
-    """
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
 class GroupViewSet(viewsets.ModelViewSet):
-    """
-    API endpoint that allows groups to be viewed or edited.
-    """
     queryset = Group.objects.all()
     serializer_class = GroupSerializer
 

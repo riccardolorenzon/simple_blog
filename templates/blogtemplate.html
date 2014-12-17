@@ -39,6 +39,12 @@
         }
         }
     </style>
+    <script>
+        $(document).on("click", ".open-UploadImageDialog", function () {
+             var blogArticleId = $(this).data('id');
+             $(".modal-body #blogArticleId").val( blogArticleId );
+        });
+    </script>
 
     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
         <ul class="nav navbar-nav">
@@ -76,21 +82,48 @@
                             </article>
                         </div>
                         <div class="panel-body">
-
+                        {% if blog.imageblogarticle_set != None %}
+                           {% for image in blog.imageblogarticle_set.all %}
+                                <div class="col-md-4">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h3>{{ image.title }}</h3>
+                                            <p>{{ image.description }}</p>
+                                        </div>
+                                        <div class="panel-body">
+                                            <a href="#">
+                                                <img class="img-responsive" src="{{ image.image.url }}">
+                                            </a>
+                                        </div>
+                                        {% if blog.author == user %}
+                                            <div class="btn-toolbar" role="toolbar">
+                                                <div class="btn-group">
+                                                     <button type="button" class="btn btn-default" aria-label="middle Align" onClick="location.href='/delete-image/{{ blog.id }}/images/{{ image.id }}'">
+                                                        <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                                     </button>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                </div>
+                           {% endfor %}
+                        {% endif %}
                         </div>
-                        <div class="btn-toolbar" role="toolbar">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-default" aria-label="left Align" onClick="location.href='/edit-article/{{ blog.id }}/'">
-                                  <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                                </button>
-                                <button type="button" class="btn btn-default" aria-label="middle Align" onClick="location.href='/delete-article/{{ blog.id }}/'">
-                                  <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
-                                </button>
-                                 <button type="button" class="btn btn-default" aria-label="right Align">
-                                  <span class="glyphicon glyphicon-upload" aria-hidden="true"></span>
-                                </button>
+                        {% if blog.author == user %}
+                            <div class="btn-toolbar" role="toolbar">
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-default" aria-label="left Align" onClick="location.href='/edit-article/{{ blog.id }}/'">
+                                      <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                    </button>
+                                    <button type="button" class="btn btn-default" aria-label="middle Align" onClick="location.href='/delete-article/{{ blog.id }}/'">
+                                      <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                    </button>
+                                    <button type="button" class="open-UploadImageDialog btn btn-default" aria-label="right Align"  data-id="{{ blog.id }}" onClick="#uploadingimagemodal"
+                                           data-toggle="modal" data-target="#uploadimagemodal">
+                                      <span class="glyphicon glyphicon-upload" aria-hidden="true"></span>
+                                    </button>
+                                </div>
                             </div>
-                        </div>
+                        {% endif %}
 
                     </div>
                 </div>
@@ -163,6 +196,29 @@
             </div>
         </div>
     </div>
-
+    <div class="modal fade" role="dialog" id = "uploadimagemodal" style ="text-align:center">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>Upload an Image</h4>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="{% url 'upload' %}" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type="hidden" name="blogArticleId" id="blogArticleId">
+                        <input type="file" class="form-control" name="file">
+                        <br>
+                        <b>Image Title</b>
+                        <input type="text" name="title" class="form-control" style="width:50%;margin-left:auto;margin-right:auto;">
+                        <br>
+                        <b>Image description</b>
+                        <input type="text" name="description" class="form-control" style="width:50%;margin-left:auto;margin-right:auto;">
+                        <br>
+                        <input type="submit" class="btn btn-primary" value="Submit">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

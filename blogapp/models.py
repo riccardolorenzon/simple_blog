@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import  User
+from simple_blog import settings
 
 # Create your models here.
 class BlogArticle(models.Model):
@@ -10,7 +11,7 @@ class BlogArticle(models.Model):
 class ImageBlogArticle(models.Model):
     title = models.CharField(max_length=60)
     description = models.TextField()
-    image = models.ImageField(upload_to='./images/')
+    image = models.ImageField(upload_to='media')
     blogarticle = models.ForeignKey(BlogArticle)
 
 class Comment(models.Model):
