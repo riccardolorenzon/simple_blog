@@ -11,7 +11,7 @@ class BlogArticle(models.Model):
 class ImageBlogArticle(models.Model):
     title = models.CharField(max_length=60)
     description = models.TextField()
-    image = models.ImageField(upload_to='media')
+    image = models.ImageField(upload_to='./')
     blogarticle = models.ForeignKey(BlogArticle)
 
 class Comment(models.Model):

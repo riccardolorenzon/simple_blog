@@ -4,6 +4,7 @@ from blogapp.views import UserViewSet, GroupViewSet, BlogArticleViewSet
 from django.contrib import admin
 from rest_framework import routers
 import settings
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 # Routers provide an easy way of automatically determining the URL conf.
 router = routers.DefaultRouter()
@@ -32,3 +33,5 @@ urlpatterns = patterns('',
 
 urlpatterns += patterns('',
     (r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}))
+
+urlpatterns += staticfiles_urlpatterns()
