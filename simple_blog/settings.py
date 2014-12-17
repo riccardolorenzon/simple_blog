@@ -50,8 +50,11 @@ MIDDLEWARE_CLASSES = (
 
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.auth.context_processors.auth',
-    'django.core.context_processors.static',
-    # other context processors....
+    'django.core.context_processors.static'
+)
+
+STATICFILES_DIRS = (
+      '/Users/riccardo/PycharmProjects/simple_blog/blogapp/static/',
 )
 
 ROOT_URLCONF = 'simple_blog.urls'
@@ -93,8 +96,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
-STATIC_ROOT = ''
+STATIC_ROOT = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'blogapp/static')
 STATIC_URL = '/static/'
+SITE_ROOT = os.path.dirname(os.path.abspath(__file__))
+STATICFILES_DIRS = (
+  os.path.join(SITE_ROOT, '/static'),
+)
 
 MEDIA_ROOT = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'media')
 MEDIA_URL = '/media/'
