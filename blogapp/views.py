@@ -38,16 +38,21 @@ def createblog(request):
     newBlog.save()
     return HttpResponseRedirect('/')
 
-def edit_article(request, article_id):
-    blog = BlogArticle.objects.get(id = article_id)
-    return render(request, "./blogedit.html", {"blog" : blog})
+def edit_article(request):
+    if request.method == 'POST':
+        article_id = request.POST['editBlogArticleId']
+        blog = BlogArticle.objects.get(id = article_id)
+        return render(request, "./blogedit.html", {"blog" : blog})
+    return HttpResponseRedirect('home')
 
-def update_article(request, article_id):
-    blog = BlogArticle.objects.get(id = article_id)
-    if blog != None and request.method == 'POST':
-        blog.title = request.POST['title']
-        blog.blog_content = request.POST['content']
-        blog.save()
+def update_article(request):
+    if request.method == 'POST':
+        article_id = request.POST['editBlogArticleId']
+        blog = BlogArticle.objects.get(id = article_id)
+        if blog != None:
+            blog.title = request.POST['title']
+            blog.blog_content = request.POST['content']
+            blog.save()
     return HttpResponseRedirect("/")
 
 def delete_article(request, article_id):
