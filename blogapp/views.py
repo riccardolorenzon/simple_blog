@@ -74,8 +74,10 @@ def upload_image(request):
     return HttpResponseRedirect("/")
 
 def delete_image(request, article_id, image_id):
+    current_user = request.user
     image = ImageBlogArticle.objects.get(id = image_id)
-    image.delete()
+    if (image.blogarticle.author == current_user):
+        image.delete()
     return HttpResponseRedirect("/")
 
 def logout_view(request):
